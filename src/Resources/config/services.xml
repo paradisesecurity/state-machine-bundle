@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="paradise_security.state_machine.composite" class="ParadiseSecurity\Bundle\StateMachineBundle\Adapter\CompositeStateMachineAdapter">
+            <argument type="tagged_iterator" tag="paradise_security.state_machine" index-by="key" />
+            <argument>%paradise_security.state_machine.default_adapter%</argument>
+            <argument>%paradise_security.state_machine.graphs_to_adapters_mapping%</argument>
+        </service>
+        <service id="ParadiseSecurity\Bundle\StateMachineBundle\Adapter\StateMachineAdapterInterface $compositeStateMachine" alias="paradise_security.state_machine.composite" />
+
+        <service id="paradise_security.state_machine" alias="paradise_security.state_machine.composite" />
+        <service id="ParadiseSecurity\Bundle\StateMachineBundle\Adapter\StateMachineAdapterInterface" alias="paradise_security.state_machine" />
+
+        <service id="paradise_security.state_machine.adapter.symfony_workflow" class="ParadiseSecurity\Bundle\StateMachineBundle\Adapter\SymfonyWorkflowAdapter">
+            <argument type="service" id="workflow.registry" />
+            <tag name="paradise_security.state_machine" key="symfony_workflow" />
+        </service>
+        <service id="ParadiseSecurity\Bundle\StateMachineBundle\Adapter\StateMachineAdapterInterface $symfonyWorkflow" alias="paradise_security.state_machine.adapter.symfony_workflow" />
+
+        <service id="paradise_security.state_machine.adapter.winzou_state_machine" class="ParadiseSecurity\Bundle\StateMachineBundle\Adapter\WinzouStateMachineAdapter">
+            <argument type="service" id="SM\Factory\Factory" />
+            <tag name="paradise_security.state_machine" key="winzou_state_machine" />
+        </service>
+        <service id="ParadiseSecurity\Bundle\StateMachineBundle\Adapter\StateMachineAdapterInterface $winzouStateMachine" alias="paradise_security.state_machine.adapter.winzou_state_machine" />
+    </services>
+</container>

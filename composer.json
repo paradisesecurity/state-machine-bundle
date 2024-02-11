@@ -1,0 +1,54 @@
+{
+    "name": "paradisesecurity/state-machine-bundle",
+    "type": "symfony-bundle",
+    "description": "Abstraction layer for State Machine.",
+    "homepage": "https://paradisesecurity.work",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paradise Security",
+            "email": "joe@paradisesecurity.work",
+            "homepage": "https://paradisesecurity.work",
+            "role": "Owner"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
+        "symfony/workflow": "^6.4 || ^7.0",
+        "winzou/state-machine": "^0.4",
+        "winzou/state-machine-bundle": "^0.6"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "phpunit/phpunit": "^9.5",
+        "webmozart/assert": "^1.9"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ParadiseSecurity\\Bundle\\StateMachineBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "ParadiseSecurity\\Bundle\\StateMachineBundle\\Test\\": "tests/Test/" }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
